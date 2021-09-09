@@ -2,7 +2,6 @@
 <form class="form mt-4" (ngSubmit)="login($event)" #loginForm="ngForm">
   <div class="form-group">
     <input
-      type="text"
       class="form-control"
       placeholder="Nome do usuário"
       [(ngModel)]="user"
@@ -38,3 +37,4 @@
     </button>
   </div>
 </form>
+<p>Não é um usuário? <a [routerLink]="['new-user']">Se cadastre!</a></p>

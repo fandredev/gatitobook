@@ -6,11 +6,15 @@ import { NewUser } from './new-user';
   providedIn: 'root'
 })
 export class NewUserService {
-  private readonly url = 'http://localhost:3000'
+  private readonly url = 'http://localhost:3000/user'
 
   constructor(private _httpClient: HttpClient) { }
 
   addNewUser(newUser: NewUser) {
-    return this._httpClient.post(`${this.url}/user/signup`, Object.freeze(newUser))
+    return this._httpClient.post(`${this.url}/signup`, Object.freeze(newUser))
+  }
+
+  verifyUserInDatabase(name: string) {
+    return this._httpClient.get(`${this.url}/exists/${name}`)
   }
 }

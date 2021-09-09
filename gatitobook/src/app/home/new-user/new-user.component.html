@@ -5,26 +5,67 @@
     <input
       type="email"
       formControlName="email"
-      name="email"
       class="form-control"
       placeholder="Email"
     />
+    <app-message
+      *ngIf="
+        newUserForm.get('email')?.errors?.email &&
+        newUserForm.get('email')?.touched
+      "
+      message="Email obrigatório."
+    ></app-message>
+    <app-message
+      *ngIf="
+        newUserForm.get('email')?.errors?.required &&
+        newUserForm.get('email')?.touched
+      "
+      message="O campo precisa ser preenchido."
+    ></app-message>
   </div>
   <div class="form-group" class="my-4">
     <input
-      name="fullName"
       formControlName="fullName"
       class="form-control"
       placeholder="Nome Completo"
     />
+    <app-message
+      message="Nome precisa ter no mínino 4 caracteres."
+      *ngIf="
+        newUserForm.get('fullName')?.errors?.minlength &&
+        newUserForm.get('fullName')?.touched
+      "
+    ></app-message>
+    <app-message
+      message="Nome precisa ser preenchido."
+      *ngIf="
+        newUserForm.get('fullName')?.errors?.required &&
+        newUserForm.get('fullName')?.touched
+      "
+    ></app-message>
   </div>
   <div class="form-group" class="my-4">
     <input
-      name="userName"
-      formControlName="userName"
       class="form-control"
       placeholder="Usuário"
+      formControlName="userName"
     />
+    <app-message
+      message="Usuário deve ser em letra mínuscula."
+      *ngIf="
+        newUserForm.get('userName')?.errors?.lowercase &&
+        newUserForm.get('userName')?.touched
+      "
+    >
+    </app-message>
+    <app-message
+      message="Usuário já existe."
+      *ngIf="
+        newUserForm.get('userName')?.errors?.userExists &&
+        newUserForm.get('userName')?.touched
+      "
+    >
+    </app-message>
   </div>
   <div class="form-group" class="my-4">
     <input
@@ -35,6 +76,10 @@
       type="password"
       class="form-control"
     />
+    <app-message
+      *ngIf="newUserForm.errors?.userEqualsPassword"
+      message="Senha deve ser diferente do usuário."
+    ></app-message>
   </div>
   <button class="btn btn-primary btn-block mb-2">Cadastrar</button>
 </form>

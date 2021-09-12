@@ -2,13 +2,14 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from './../../environments/environment';
 import { UserService } from './../auth/user/user.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  readonly url = 'http://localhost:3000'
+  readonly url = environment.apiURL
   constructor(private _httpClient: HttpClient, private _userService: UserService) { }
 
   auth(userName: string, password: string): Observable<HttpResponse<any>> {

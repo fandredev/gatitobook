@@ -1,1 +1,3 @@
-<p>list-animals works!</p>
+<div *ngIf="animals$ | async as animals">
+  <app-grid-photos-animals [animals]="animals"></app-grid-photos-animals>
+</div>

@@ -15,8 +15,7 @@ export class HeaderComponent {
 
   user$ = this._userService.returnUser()
 
-  logout($event: any) {
-    console.log($event)
+  logout() {
     this._userService.logout()
     this._router.navigate([''])
   }

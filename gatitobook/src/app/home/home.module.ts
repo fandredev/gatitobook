@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MessageModule } from './../components/message/message.module';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from './../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { LoginComponent } from './login/login.component';
@@ -13,9 +13,8 @@ import { NewUserComponent } from './new-user/new-user.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    ReactiveFormsModule,
     FormsModule,
-    MessageModule
+    SharedModule
   ],
   exports: [HomeComponent]
 })

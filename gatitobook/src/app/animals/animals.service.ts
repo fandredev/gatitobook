@@ -1,9 +1,11 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, mapTo } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
-import { TokenService } from './../auth/token.service';
-import { Animals } from './animals';
+import { Animal, Animals } from './animals';
+
+const notModified = '304'
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +14,28 @@ export class AnimalsService {
 
   readonly api = environment.apiURL
 
-  constructor(private readonly _http: HttpClient, private readonly _tokenService: TokenService) { }
+  constructor(private readonly _http: HttpClient) { }
+
 
   listUser(name: string): Observable<Animals> {
-    const token = this._tokenService.returnToken()
-    const headers = new HttpHeaders().append('x-access-token', token)
+    return this._http.get<Animals>(`${this.api}/${name}/photos`)
+  }
 
-    return this._http.get<Animals>(`${this.api}/${name}/photos`, { headers })
+  findById(id: number): Observable<Animal> {
+    return this._http.get<Animal>(`${this.api}/photos/${id}`)
+  }
+
+  deleteAnimal(id: number): Observable<Animal> {
+    return this._http.delete<Animal>(`${this.api}/photos/${id}`)
+  }
+
+  likePhoto(id: number): Observable<boolean> {
+    return this._http.post(`${this.api}/photos/${id}/like`, {}, { observe: 'response' })
+      .pipe(
+        mapTo(true),
+        catchError(error => {
+          return error.status === notModified ? of(false) : throwError(error)
+        })
+      )
   }
 }

@@ -9,11 +9,12 @@ import { CommentsComponent } from './detail-animal/comments/comments.component';
 import { DetailAnimalComponent } from './detail-animal/detail-animal.component';
 import { GridPhotosAnimalsComponent } from './grid-photos-animals/grid-photos-animals.component';
 import { ListAnimalsComponent } from './list-animals/list-animals.component';
+import { NewAnimalComponent } from './new-animal/new-animal.component';
 
 
 
 @NgModule({
-  declarations: [ListAnimalsComponent, AnimalsComponent, GridPhotosAnimalsComponent, DetailAnimalComponent, CommentsComponent],
+  declarations: [ListAnimalsComponent, AnimalsComponent, GridPhotosAnimalsComponent, DetailAnimalComponent, CommentsComponent, NewAnimalComponent],
   imports: [
     CommonModule,
     AnimalsRoutingModule,
